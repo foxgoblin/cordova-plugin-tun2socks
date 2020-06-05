@@ -1,0 +1,13 @@
+{
+  "name": "cordova-plugin-tun2socks",
+  "version": "1.0.1",
+  "description": "This Cordova plugin provides the ability to start a system-wide VPN for Android devices.",
+  "cordova": {
+    "id": "cordova-plugin-tun2socks",
+    "platforms": [
+      "android"
+    ]
+  },
+  "author": "UWNetworksLab jerry",
+  "license": "Apache-2.0"
+}
