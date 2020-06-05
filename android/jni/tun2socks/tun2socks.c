@@ -466,13 +466,40 @@ JNIEXPORT jint JNICALL Java_org_uproxy_tun2socks_Tun2SocksJni_runTun2Socks(
     const char* socksServerAddressStr = (*env)->GetStringUTFChars(env, socksServerAddress, 0);
     const char* udpRelayAddressStr = (*env)->GetStringUTFChars(env, udpRelayAddress, 0);
     const char* dnsResolverAddressStr = (*env)->GetStringUTFChars(env, dnsResolverAddress, 0);
+    char* atStr = strchr(socksServerAddressStr, '@');
+    char* socksServerHostStr = NULL;
+    char* udpRelayHostStr = NULL;
+    char* usernameStr = NULL;
+    char* passwordStr = NULL;
+    if(atStr){
+        socksServerHostStr = atStr+1;
+        char* colonStr = strchr(socksServerAddressStr, ':');
+        if(colonStr){
+            usernameStr = (char*)socksServerAddressStr;
+	    *colonStr = 0;
+            passwordStr = colonStr+1;
+            *atStr = 0;
+        }
+    }
+    else{
+        socksServerHostStr = (char*)socksServerAddressStr;
+    }
+    atStr = strchr(udpRelayAddressStr,'@');
+    if(atStr){
+        udpRelayHostStr = atStr+1;
+    }
+    else{
+        udpRelayHostStr = (char*)udpRelayAddressStr;
+    }
 
     init_arguments("uProxy tun2socks");
 
     options.netif_ipaddr = (char*)vpnIpAddressStr;
     options.netif_netmask = (char*)vpnNetMaskStr;
-    options.socks_server_addr = (char*)socksServerAddressStr;
-    options.udp_relay_addr = (char*)udpRelayAddressStr;
+    options.socks_server_addr = socksServerHostStr;
+    options.username = usernameStr;
+    options.password = passwordStr;
+    options.udp_relay_addr = udpRelayHostStr;
     options.dns_resolver_addr = (char*)dnsResolverAddressStr;
     options.transparent_dns = transparentDNS;
     options.tun_fd = vpnInterfaceFileDescriptor;
