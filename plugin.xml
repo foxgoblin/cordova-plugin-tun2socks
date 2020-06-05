@@ -35,13 +35,20 @@
         android:permission="android.permission.BIND_VPN_SERVICE" />
     </config-file>
 
-    <source-file
-      src="android/java/org/uproxy/tun2socks"
-      target-dir="src/org/uproxy/tun2socks" />
+    <source-file src="android/java/org/uproxy/tun2socks/Tunnel.java" target-dir="src/org/uproxy/tun2socks" />
+    <source-file src="android/java/org/uproxy/tun2socks/Tun2SocksJni.java" target-dir="src/org/uproxy/tun2socks" />
+    <source-file src="android/java/org/uproxy/tun2socks/TunnelState.java" target-dir="src/org/uproxy/tun2socks" />
+    <source-file src="android/java/org/uproxy/tun2socks/TunnelVpnService.java" target-dir="src/org/uproxy/tun2socks" />
+    <source-file src="android/java/org/uproxy/tun2socks/TunnelManager.java" target-dir="src/org/uproxy/tun2socks" />
+    <source-file src="android/java/org/uproxy/tun2socks/Tun2Socks.java" target-dir="src/org/uproxy/tun2socks" />
 
     <source-file
       src="android/libs/armeabi-v7a/libtun2socks.so"
       target-dir="libs/armeabi-v7a" />
+
+    <source-file
+      src="android/libs/arm64-v8a/libtun2socks.so"
+      target-dir="libs/arm64-v8a" />
 
 		<framework src="android/java/build-extras.gradle" custom="true" type="gradleReference" />
   </platform>
